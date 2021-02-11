@@ -15,4 +15,19 @@ public static class ExtendedMath
     {
         return (value - minValue) / (maxValue - minValue) * (maxNormalizedValue - minNormalizedValue) + minNormalizedValue;
     }
+
+    public static Vector3 GetMousePositionOnVerticalPlane(float planeOffset)
+    {
+        var camera = Camera.main;
+        return GetMousePositionOnVerticalPlane(camera, planeOffset);
+    }
+    
+    public static Vector3 GetMousePositionOnVerticalPlane(Camera camera, float planeOffset)
+    {
+        var mousePos = Input.mousePosition;
+        var ray = camera.ScreenPointToRay(mousePos);
+        var plane = new Plane(Vector3.forward, planeOffset);
+        plane.Raycast(ray, out float distance);
+        return ray.GetPoint(distance);
+    }
 }
