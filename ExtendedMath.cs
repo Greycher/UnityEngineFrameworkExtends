@@ -16,18 +16,17 @@ public static class ExtendedMath
         return (value - minValue) / (maxValue - minValue) * (maxNormalizedValue - minNormalizedValue) + minNormalizedValue;
     }
 
-    public static Vector3 GetMousePositionOnVerticalPlane(float planeOffset)
+    public static Vector3 GetPointedWorldPosition(Vector2 screenPos, float distance)
     {
         var camera = Camera.main;
-        return GetMousePositionOnVerticalPlane(camera, planeOffset);
+        return GetPointedWorldPosition(screenPos, camera, distance);
     }
     
-    public static Vector3 GetMousePositionOnVerticalPlane(Camera camera, float planeOffset)
+    public static Vector3 GetPointedWorldPosition(Vector3 screenPos, Camera camera, float distance)
     {
-        var mousePos = Input.mousePosition;
-        var ray = camera.ScreenPointToRay(mousePos);
-        var plane = new Plane(Vector3.forward, planeOffset);
-        plane.Raycast(ray, out float distance);
-        return ray.GetPoint(distance);
+        var ray = camera.ScreenPointToRay(screenPos);
+        var plane = new Plane(camera.transform.forward, distance);
+        plane.Raycast(ray, out float rayDistance);
+        return ray.GetPoint(rayDistance);
     }
 }
