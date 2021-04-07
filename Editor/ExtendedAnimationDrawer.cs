@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Mobge;
-using Mobge.BrigRex.Components;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 [CustomPropertyDrawer(typeof(ExtendedAnimation.Animation))]
