@@ -10,8 +10,13 @@ public static class ExtendedMath
         var y = b.y - a.y;
         return x * x + y * y;
     }
-
+    
     public static float Normalize(float value, float minValue, float maxValue, float minNormalizedValue = 0, float maxNormalizedValue = 1)
+    {
+        return Mathf.Clamp(NormalizeUnclamped(value, maxValue, maxValue, minNormalizedValue, maxNormalizedValue), minNormalizedValue, maxNormalizedValue);
+    }
+
+    public static float NormalizeUnclamped(float value, float minValue, float maxValue, float minNormalizedValue = 0, float maxNormalizedValue = 1)
     {
         return (value - minValue) / (maxValue - minValue) * (maxNormalizedValue - minNormalizedValue) + minNormalizedValue;
     }

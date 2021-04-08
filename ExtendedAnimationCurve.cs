@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using Mobge.Animation;
 using UnityEngine;
 
@@ -21,14 +19,17 @@ public static class ExtendedAnimationCurve
             _endTime = curve.keys[curve.keys.Length - 1].time;
         }
 
-        public bool TryMove(float deltaTime, out float value)
+        public bool TryMove(float deltaTime)
         {
-            value = 0;
             if (_timer == _endTime) return false;
 
             _timer = Mathf.Min(_endTime, _timer + deltaTime);
-            value = curve.Evaluate(_timer);
             return true;
+        }
+
+        public float Evaluate()
+        {
+            return curve.Evaluate(_timer);
         }
 
         public void Reset()
